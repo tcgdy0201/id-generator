@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:component-scan base-package="com.hujiang.foe.id.generator"/>
+
+    <!--spring 读取配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+               <list>
+                      <value>classpath:test.properties</value>
+               </list>
+        </property>
+    </bean>
+    <import resource="classpath:/META-INF/brevy/cache/codis/spring-cache-codis.xml"/>
+
+
+    <bean id="idGenConfig" class="com.hujiang.foe.id.generator.core.IdGenConfig">
+        <property name="length" value="20"/>
+    </bean>
+    <bean id="codisUniqueNumberProducer" class="com.hujiang.foe.id.generator.core.CodisUniqueNumberProducer">
+        <constructor-arg index="2" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="jodisClient"/>
+        <constructor-arg index="1" value="id_gen_ut"/>
+    </bean>
+
+    <bean id="idGenerator" class="com.hujiang.foe.id.generator.core.IdGenerator">
+        <constructor-arg index="1" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="codisUniqueNumberProducer"/>
+    </bean>
+
+
+
+
+    <bean id="codisUniqueNumberProducer2" class="com.hujiang.foe.id.generator.core.CodisUniqueNumberProducer">
+        <constructor-arg index="2" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="jodisClient"/>
+        <constructor-arg index="1" value="id_gen_ut"/>
+    </bean>
+
+    <bean id="idGenerator2" class="com.hujiang.foe.id.generator.core.IdGenerator">
+        <constructor-arg index="1" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="codisUniqueNumberProducer2"/>
+    </bean>
+
+
+
+    <bean id="codisUniqueNumberProducer3" class="com.hujiang.foe.id.generator.core.CodisUniqueNumberProducer">
+        <constructor-arg index="2" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="jodisClient"/>
+        <constructor-arg index="1" value="id_gen_ut"/>
+    </bean>
+
+    <bean id="idGenerator3" class="com.hujiang.foe.id.generator.core.IdGenerator">
+        <constructor-arg index="1" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="codisUniqueNumberProducer3"/>
+    </bean>
+
+
+    <bean id="codisUniqueNumberProducer4" class="com.hujiang.foe.id.generator.core.CodisUniqueNumberProducer">
+        <constructor-arg index="2" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="jodisClient"/>
+        <constructor-arg index="1" value="id_gen_ut"/>
+    </bean>
+
+    <bean id="idGenerator4" class="com.hujiang.foe.id.generator.core.IdGenerator">
+        <constructor-arg index="1" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="codisUniqueNumberProducer4"/>
+    </bean>
+
+
+    <bean id="codisUniqueNumberProducer5" class="com.hujiang.foe.id.generator.core.CodisUniqueNumberProducer">
+        <constructor-arg index="2" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="jodisClient"/>
+        <constructor-arg index="1" value="id_gen_ut"/>
+    </bean>
+
+    <bean id="idGenerator5" class="com.hujiang.foe.id.generator.core.IdGenerator">
+        <constructor-arg index="1" ref="idGenConfig"/>
+        <constructor-arg index="0" ref="codisUniqueNumberProducer5"/>
+    </bean>
+</beans>
